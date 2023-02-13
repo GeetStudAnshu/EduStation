@@ -1,0 +1,111 @@
+<script>
+    $(document).ready(function() {
+
+        // Staff Chart
+         var options = {
+          series: [{{total_attendance}},{{total_leave}}],
+          chart: {
+          width: 440,
+          type: 'pie',
+        },
+        labels: ['Attendance','Leave'],
+        colors:['#fdbb38', '#19affb'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-staff-1"), options);
+        chart.render();
+
+        // Staff Chart 2
+        var subject_list = {{ subject_list|safe }}
+        var options = {
+          series: [{
+          name: 'Attendance',
+          data: {{attendance_list}}
+        }],
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        colors:['#f46841'],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: subject_list,
+        },
+        yaxis: {
+          title: {
+            text: ''
+          }
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#staff-chart-2"), options);
+        chart.render();
+
+        // Chart - 3
+        var name_list = {{ student_list|safe }}
+    var options = {
+          series: [{
+          name: 'Attendance',
+          data: {{student_list_attendance_present}}
+        }],
+          chart: {
+          height: 350,
+          type: 'area'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          type: 'category',
+          categories: name_list
+        },
+        tooltip: {
+          x: {
+            format: 'dd/MM/yy HH:mm'
+          },
+        },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-staff-3"), options);
+        chart.render();
+
+    });
+</script>

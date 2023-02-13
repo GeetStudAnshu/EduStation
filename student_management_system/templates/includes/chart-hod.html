@@ -1,0 +1,202 @@
+<script>
+  $(document).ready(function() {
+    //Chart - 1
+    var options = {
+          series: [{{stud_count}}, {{fac_count}}, {{course_count}}, {{subject_count}}],
+          chart: {
+          width: 420,
+          type: 'pie',
+        },
+        colors: ['#19affb', '#fdbb38', '#f46841', '#6e6bfa'],
+        labels: ['Students', 'Staffs', 'Courses', 'Subjects'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-1"), options);
+        chart.render();
+
+
+        // Chart - 2
+        var options = {
+          series: [{{student_gender_male}},{{student_gender_female}},{{student_gender_other}}],
+          chart: {
+          height: 350,
+          type: 'radialBar',
+        },
+        colors: ['#fdbb38', '#f46841', '#6e6bfa'],
+        stroke: {
+            lineCap: "round"
+        },
+        plotOptions: {
+          radialBar: {
+            dataLabels: {
+              name: {
+                fontSize: '22px',
+              },
+              value: {
+                fontSize: '16px',
+              },
+            }
+          }
+        },
+        labels: ['Male', 'Female', 'Others'],
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-2"), options);
+        chart.render();
+
+        // Chart - 3
+
+        var course_list = {{course_name_list|safe}}
+        var options = {
+          series: {{student_count_list_in_course}},
+          chart: {
+          type: 'polarArea',
+        },
+        labels: course_list,
+        colors: ['#fdbb38', '#19affb' , '#6e6bfa', '#f46841'],
+        stroke: {
+          colors: ['#fff']
+        },
+        fill: {
+          opacity: 0.8
+        },
+        yaxis: {
+            show: false,
+        },
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-3"), options);
+        chart.render();
+
+        // Chart - 4
+          var subject_list = {{subject_list|safe}}
+          var options = {
+          series: {{student_count_list_in_subject}},
+          chart: {
+          width: 420,
+          type: 'pie',
+        },
+        labels: subject_list,
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-4"), options);
+        chart.render();
+
+        // Chart - 5
+        var staff_list = {{staff_name_list|safe}}
+        var options = {
+          series: [{
+          name: 'Attendance',
+          data: {{staff_attendance_present_list}}
+        }, {
+          name: 'Leave',
+          data: {{staff_attendance_leave_list}}
+        }],
+          chart: {
+          type: 'bar',
+          height: 350
+        },
+        colors: ['#19affb', '#fdbb38'],
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            endingShape: 'rounded'
+          },
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent']
+        },
+        xaxis: {
+          categories: staff_list,
+        },
+        fill: {
+          opacity: 1
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val
+            }
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-5"), options);
+        chart.render();
+
+
+        // Chart - 6
+        var student_list = {{student_name_list|safe}}
+        var options = {
+          series: [{
+          name: 'Attendance',
+          data: {{student_attendance_present_list}}
+        }, {
+          name: 'Leave',
+          data: {{student_attendance_leave_list}}
+        }],
+          chart: {
+          height: 350,
+          type: 'area'
+        },
+        colors: ['#19affb', '#fdbb38'],
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'smooth'
+        },
+        xaxis: {
+          type: 'categories',
+          categories: student_list
+        },
+        tooltip: {
+          x: {
+            format: ''
+          },
+        },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-hod-6"), options);
+        chart.render();
+  });
+</script>

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title_content %}
+View Result | EduStation
+{% endblock title_content %}
+{% block main_content %}
+<div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">View Result</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item"><a href="index.html">Student</a></li>
+                           <li class="breadcrumb-item active">Result</li>
+                        </ul>
+                     </div>
+
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card card-table">
+                        <div class="card-body">
+                           {% include 'includes/messages.html' %}
+                           <div class="table-responsive">
+                              <table class="table table-hover table-center mb-0" id="table_id">
+                                 <thead>
+                                    <tr>
+                                       <th>ID</th>
+                                       <th>Subject</th>
+                                        <th>Assignment Marks</th>
+                                        <th>Exam Mark</th>
+                                       <th class="text-right">Result</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                 {% for i in result %}
+                                    <tr>
+                                       <td>{{i.id}}</td>
+                                       <td>{{i.subject_id.subject_name}}</td>
+                                        <td>{{i.subject_assignment_marks}}</td>
+                                        <td>{{i.subject_exam_marks}}</td>
+                                       <td class="text-right">
+                                          {% if mark >= 35 %}
+                                          <span class="badge badge-success">Pass</span>
+                                          {% else %}
+                                          <span class="badge badge-danger">Fail</span>
+                                          {% endif %}
+                                       </td>
+                                    </tr>
+                                 {% endfor %}
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+{% endblock main_content%}

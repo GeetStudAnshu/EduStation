@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title_content %}
+Student Home | EduStation
+{% endblock title_content %}
+{% block main_content %}
+<div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <h3 class="page-title">Hello There Student!</h3>
+                        <ul class="breadcrumb">
+                           <li class="breadcrumb-item active">Dashboard</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                     <div class="card bg-one w-100">
+                        <a href="{% url 'stud_feedback' %}"><div class="card-body">
+                           <div class="db-widgets d-flex justify-content-between align-items-center">
+                              <div class="db-icon" style="padding-left: 18px;">
+                                 <i class="fas fa-comment-alt"></i>
+                              </div>
+                              <div class="db-info">
+                                 <h3>{{feedbacks_given}}</h3>
+                                 <h6>Feedbacks Given</h6>
+                              </div>
+                           </div>
+                        </div></a>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                     <div class="card bg-two w-100">
+                        <a href="{% url 'student_view_attendance' %}"><div class="card-body">
+                           <div class="db-widgets d-flex justify-content-between align-items-center">
+                              <div class="db-icon" style="padding-left: 17px;">
+                                 <i class="fas fa-calendar-check"></i>
+                              </div>
+                              <div class="db-info">
+                                 <h3>{{attendance_present}}</h3>
+                                 <h6>Days Present</h6>
+                              </div>
+                           </div>
+                        </div></a>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                     <div class="card bg-three w-100">
+                        <a href="#"><div class="card-body">
+                           <div class="db-widgets d-flex justify-content-between align-items-center">
+                              <div class="db-icon" style="padding-left: 17px;">
+                                 <i class="fas fa-book-open"></i>
+                              </div>
+                              <div class="db-info">
+                                 <h3>{{subjects}}</h3>
+                                 <h6>Subjects Studying</h6>
+                              </div>
+                           </div>
+                        </div></a>
+                     </div>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                     <div class="card bg-four w-100">
+                        <a href="{% url 'stud_apply_leave' %}"><div class="card-body">
+                           <div class="db-widgets d-flex justify-content-between align-items-center">
+                              <div class="db-icon" style="padding-left: 15px;">
+                                 <i class="fas fa-door-open"></i>
+                              </div>
+                              <div class="db-info">
+                                 <h3>{{leaves_taken}}</h3>
+                                 <h6>Leaves Taken</h6>
+                              </div>
+                           </div>
+                        </div></a>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12 col-lg-6">
+                     <div class="card card-chart">
+                        <div class="card-header">
+                           <div class="row align-items-center">
+                              <div class="col-6">
+                                 <h5 class="card-title">Total Attendance Data</h5>
+                              </div>
+
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <div id="chart-stud-1"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6">
+                     <div class="card card-chart">
+                        <div class="card-header">
+                           <div class="row align-items-center">
+                              <div class="col-6">
+                                 <h5 class="card-title">Attendance by Subjects</h5>
+                              </div>
+
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <div id="stud-chart-2"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12 col-lg-17">
+                     <div class="card card-chart">
+                        <div class="card-header">
+                           <div class="row align-items-center">
+                              <div class="col-6">
+                                 <h5 class="card-title">{{student_obj.admin.first_name}}'s Result</h5>
+                              </div>
+
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <div id="chart-stud-3"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               </div>
+   {% include 'includes/charts.html' %}
+{% endblock main_content %}

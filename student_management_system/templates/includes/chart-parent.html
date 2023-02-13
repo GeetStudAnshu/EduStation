@@ -1,0 +1,31 @@
+<script>
+    $(document).ready(function() {
+
+        //Chart-1
+        var options = {
+          series: [{{data_leave_count}},{{attendance_present}}],
+          chart: {
+          width: 380,
+          height: 300,
+          type: 'pie',
+        },
+        colors:['#fdbb38', '#19affb'],
+        labels: ['Leave', 'Present'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-parent-1"), options);
+        chart.render();
+
+    });
+</script>

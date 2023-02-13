@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title_content %}
+Collect Fees | EduStation
+{% endblock title_content %}
+{% block main_content %}
+<div class="content container-fluid">
+
+		<div class="page-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<h3 class="page-title">Collect Fees</h3>
+					<ul class="breadcrumb">
+						<li class="breadcrumb-item"><a href="subjects.html">Student</a></li>
+						<li class="breadcrumb-item active">Collect Fees</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+  <div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-body">
+				{% include 'includes/messages.html' %}
+				<form action="{% url 'collect_fees' %}" method="post">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-12">
+							<h5 class="form-title"><span>Collect Fees</span></h5>
+						</div>
+                        <div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Student</label>
+                                <select class="form-control" name="stud" required>
+                                  <option>Select Student</option>
+                                   {% for i in stud_id %}
+                                  <option value="{{i.id}}">{{i.id}}&nbsp;|&nbsp;{{i.admin.first_name}}&nbsp;{{i.admin.last_name}}</option>
+                                    {% endfor %}
+                                </select>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Fee Amount</label>
+								<input type="text" class="form-control" name="fee_amt" required>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Payment Method</label>
+                                <select class="form-control" name="pay_meth" required>
+                                  <option>Select Type</option>
+                                  <option value="Cash">Cash</option>
+                                  <option value="UPI">UPI</option>
+                                  <option value="Cheque">Cheque</option>
+                                </select>
+							</div>
+						</div>
+                        <div class="col-12 col-sm-6">
+							<div class="form-group">
+								<label>Reference Number</label>
+								<input type="text" class="form-control" name="ref_num" required>
+							</div>
+						</div>
+						<div class="col-12">
+							<button type="submit" class="btn btn-primary">Collect Fees</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+{% endblock main_content%}
