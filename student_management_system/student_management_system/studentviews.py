@@ -9,12 +9,15 @@ from app.models import Attendance, Courses, Students, NotificationStudent, FeedB
 def HOME(request):
     student_obj = Students.objects.get(admin=request.user.id)
     attendance_present = AttendanceReport.objects.filter(student_id=student_obj, status=True).count()
-    subjects = Subjects.objects.filter(course_id=student_obj.course_id).count()
+    subjects = Subjects.objects.filter(course_id=student_obj.course_id)
+    subjects_count = Subjects.objects.filter(course_id=student_obj.course_id).count()
     leaves_taken = LeaveReportStudent.objects.filter(student_id=student_obj, leave_status=1).count()
     feedbacks_given = FeedBackStudent.objects.all().count()
 
-    internal_marks = StudentResult.objects.get(subject_assignment_marks = student_obj)
-    print(internal_marks)
+    intres = StudentResult.objects.filter(student_id=student_obj.id).values('subject_assignment_marks')
+    extres = StudentResult.objects.filter(student_id=student_obj.id).values('subject_exam_marks')
+    print(intres)
+    print(extres)
 
     # For Attendance Data PIE CHART
     data_present = []
@@ -46,7 +49,7 @@ def HOME(request):
         'student_obj': student_obj,
         'feedbacks_given': feedbacks_given,
         'attendance_present': attendance_present,
-        'subjects': subjects,
+        'subjects_count': subjects_count,
         'leaves_taken': leaves_taken,
         'data_leave_count': data_leave_count,
         'data_leave': data_leave,
@@ -167,7 +170,6 @@ def STUDENT_VIEW_RESULT(request):
         exam_mark = i.subject_exam_marks
 
         mark = assignment_mark + exam_mark
-        print(mark)
 
     context = {
         'result': result,
