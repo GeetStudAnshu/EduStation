@@ -13,6 +13,9 @@ def HOME(request):
     leaves_taken = LeaveReportStudent.objects.filter(student_id=student_obj, leave_status=1).count()
     feedbacks_given = FeedBackStudent.objects.all().count()
 
+    internal_marks = StudentResult.objects.get(subject_assignment_marks = student_obj)
+    print(internal_marks)
+
     # For Attendance Data PIE CHART
     data_present = []
     data_leave = []
@@ -39,7 +42,6 @@ def HOME(request):
                                                                    student_id=student_obj.id).count()
         subject_name.append(subject.subject_code)
         data_present_2.append(attendance_present_count)
-
     context = {
         'student_obj': student_obj,
         'feedbacks_given': feedbacks_given,

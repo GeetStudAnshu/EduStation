@@ -72,6 +72,7 @@ Feedback | EduStation
                                        <th>ID</th>
                                        <th>Feedback</th>
                                        <th>Reply</th>
+                                       <th>Replied On</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -83,6 +84,7 @@ Feedback | EduStation
                                         <td><span class="badge badge-secondary">No Reply</span></td>
                                         {% else %}
                                         <td>{{i.feedback_reply}}</td>
+                                        <td>{{i.updated_at}}</td>
                                         {% endif %}
                                     </tr>
                                  {% endfor %}

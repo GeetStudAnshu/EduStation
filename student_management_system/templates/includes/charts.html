@@ -1,4 +1,4 @@
-<script>
+ <script>
     $(document).ready(function() {
 
         //Chart-1
@@ -78,13 +78,14 @@
         chart.render();
 
         // Chart - 3
+        var subjects = {{subject_name|safe}}
         var options = {
           series: [{
           name: 'Internal',
-          data: [11, 17]
+          data: [11, 17, 25, 30]
         }, {
           name: 'External',
-          data: [21, 7]
+          data: [21, 57, 39, 44]
         }],
           chart: {
           type: 'bar',
@@ -124,7 +125,7 @@
         },
         xaxis: {
           type: 'categories',
-          categories: ['SUB1', 'SUB2'],
+          categories: subjects,
         },
         legend: {
           position: 'right',

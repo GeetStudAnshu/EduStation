@@ -67,8 +67,8 @@ Student Feedback | EduStation
             </div>
 
 <!--View all Notification-->
-<div class="modal fade" id="view_feedback_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade bd-example-modal-lg" id="view_feedback_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Feedback Reply History</h5>
@@ -85,14 +85,22 @@ Student Feedback | EduStation
                               <table class="table table-hover table-center mb-0" id="table_id">
                                  <thead>
                                     <tr>
+                                       <th>Name</th>
+                                       <th>Email</th>
                                        <th>Feedback</th>
+                                       <th>Reply</th>
+                                       <th>Replied On</th>
                                        <th class="text-right">Action</th>
                                     </tr>
                                  </thead>
                                  <tbody>
                                  {% for i in feedback %}
                                     <tr>
+                                        <td style="width:68%;">{{i.student_id.admin.first_name}}&nbsp;{{i.student_id.admin.last_name}}</td>
+                                        <td style="width:68%;">{{i.student_id.admin.email}}</td>
                                         <td style="width:68%;">{{i.feedback}}</td>
+                                        <td style="width:68%;">{{i.feedback_reply}}</td>
+                                        <td style="width:68%;">{{i.updated_at}}</td>
                                         {% if i.feedback_reply == "" %}
                                             <td style="width:32%;"><span class="badge badge-danger">Unread</span></td>
                                         {% else %}
@@ -110,7 +118,6 @@ Student Feedback | EduStation
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

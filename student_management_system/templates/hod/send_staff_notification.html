@@ -61,8 +61,8 @@ Staff Notifications | EduStation
             </div>
 
 <!--View all Notification-->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Notification History</h5>
@@ -79,6 +79,8 @@ Staff Notifications | EduStation
                               <table class="table table-hover table-center mb-0" id="table_id">
                                  <thead>
                                     <tr>
+                                       <th>Name</th>
+                                       <th>Email</th>
                                        <th>Message</th>
                                        <th class="text-right">Status</th>
                                     </tr>
@@ -86,6 +88,8 @@ Staff Notifications | EduStation
                                  <tbody>
                                  {% for i in see_notification %}
                                     <tr>
+                                        <td style="width:68%;">{{i.staff_id.admin.first_name}}&nbsp;{{i.staff_id.admin.last_name}}</td>
+                                        <td style="width:68%;">{{i.staff_id.admin.email}}</td>
                                         <td style="width:68%;">{{i.message}}</td>
                                         {% if i.status == 0 %}
                                             <td style="width:32%;"><span class="badge badge-danger">Unread</span></td>
@@ -104,7 +108,6 @@ Staff Notifications | EduStation
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
