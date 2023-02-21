@@ -78,14 +78,14 @@
         chart.render();
 
         // Chart - 3
-        var subjects = {{subject_name|safe}}
+        var subjects = {{subject_names|safe}}
         var options = {
           series: [{
           name: 'Internal',
-          data: [11, 17, 25, 30]
+          data: {{subject_assignment_marks}}
         }, {
           name: 'External',
-          data: [21, 57, 39, 44]
+          data: {{subject_exam_marks}}
         }],
           chart: {
           type: 'bar',
@@ -98,6 +98,7 @@
             enabled: true
           }
         },
+        colors:['#fdbb38', '#19affb'],
         responsive: [{
           breakpoint: 480,
           options: {

@@ -14,10 +14,14 @@ def HOME(request):
     leaves_taken = LeaveReportStudent.objects.filter(student_id=student_obj, leave_status=1).count()
     feedbacks_given = FeedBackStudent.objects.all().count()
 
-    intres = StudentResult.objects.filter(student_id=student_obj.id).values('subject_assignment_marks')
-    extres = StudentResult.objects.filter(student_id=student_obj.id).values('subject_exam_marks')
-    print(intres)
-    print(extres)
+
+    # Fetch the subject exam and assignment marks with subject names for the logged-in student
+    results = StudentResult.objects.filter(student_id=student_obj.id).select_related('subject_id')
+
+    # Extract the subject exam marks and subject names from the results
+    subject_exam_marks = [result.subject_exam_marks for result in results]
+    subject_assignment_marks = [result.subject_assignment_marks for result in results]
+    subject_names = [result.subject_id.subject_name for result in results]
 
     # For Attendance Data PIE CHART
     data_present = []
@@ -56,6 +60,9 @@ def HOME(request):
         'total_subjects': total_subjects,
         'subject_name': subject_name,
         'data_present_2': data_present_2,
+        'subject_names': subject_names,
+        'subject_exam_marks': subject_exam_marks,
+        'subject_assignment_marks': subject_assignment_marks,
     }
     return render(request, 'student/home.html', context)
 
