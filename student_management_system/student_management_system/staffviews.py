@@ -273,6 +273,8 @@ def STAFF_SAVE_RESULT(request):
         assignment_mark = request.POST.get('assignment_mark')
         Exam_mark = request.POST.get('Exam_mark')
 
+        total = int(assignment_mark) + int(Exam_mark)
+
         get_student = Students.objects.get(admin=stud_id)
         get_subject = Subjects.objects.get(id=subject_id)
 
@@ -281,12 +283,13 @@ def STAFF_SAVE_RESULT(request):
             result = StudentResult.objects.get(subject_id=get_subject, stud_id=get_student)
             result.subject_assignment_marks = assignment_mark
             result.subject_exam_marks = Exam_mark
+            result.total = total
             result.save()
             messages.success(request, "Successfully Updated Result")
             return redirect('staff_add_result')
         else:
             result = StudentResult(student_id=get_student, subject_id=get_subject, subject_exam_marks=Exam_mark,
-                                   subject_assignment_marks=assignment_mark)
+                                   subject_assignment_marks=assignment_mark, total=total)
             result.save()
             messages.success(request, "Successfully Added Result")
             return redirect('staff_add_result')

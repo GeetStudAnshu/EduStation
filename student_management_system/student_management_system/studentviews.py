@@ -21,7 +21,7 @@ def HOME(request):
     # Extract the subject exam marks and subject names from the results
     subject_exam_marks = [result.subject_exam_marks for result in results]
     subject_assignment_marks = [result.subject_assignment_marks for result in results]
-    subject_names = [result.subject_id.subject_name for result in results]
+    subject_names = [result.subject_id.subject_code for result in results]
 
     # For Attendance Data PIE CHART
     data_present = []
@@ -177,6 +177,7 @@ def STUDENT_VIEW_RESULT(request):
         exam_mark = i.subject_exam_marks
 
         mark = assignment_mark + exam_mark
+        print(mark)
 
     context = {
         'result': result,
